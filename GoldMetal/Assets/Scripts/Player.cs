@@ -6,12 +6,18 @@ using UnityEngine.Tilemaps;
 public class Player : MonoBehaviour
 {
     public Vector2 inputVec;
+    public GameObject start;
 
     public float Speed;
 
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     Animator anim;
+
+    private void Start()
+    {
+        Instantiate(start);
+    }
 
     private void Awake()
     {
