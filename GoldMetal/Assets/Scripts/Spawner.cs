@@ -7,8 +7,11 @@ using UnityEngine.Accessibility;
 public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
+    public SpawnData[] spawnData;
     public float spawnCoolTime;
     float timer;
+
+    public int level;
 
     private void Awake()
     {
@@ -18,16 +21,27 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (timer > spawnCoolTime) {
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.Instance.gameTime / 10f),spawnData.Length-1) ;
+
+        if (timer > (spawnData[level].spawnTime)){
             Spawn();
-            timer = 0;
+            timer = 0; 
         }
     }
 
     void Spawn()
     {
-        /*GameObject enemy = GameManager.Instance.pool.Get(Random.RandomRange(0,2));
-        enemy.transform.position = spawnPoints[Random.Range(1,spawnPoints.Length)].position;*/
-        GameManager.Instance.pool.Get(1);
+        GameObject enemy = GameManager.Instance.pool.Get(0);
+        enemy.transform.position = spawnPoints[Random.Range(1,spawnPoints.Length)].position;
+        enemy.GetComponent<Enemy>().Init(spawnData[level]);
     }
+}
+
+[System.Serializable]
+public class SpawnData
+{
+    public int spriteType;
+    public float spawnTime;
+    public int health;
+    public int speed;
 }
