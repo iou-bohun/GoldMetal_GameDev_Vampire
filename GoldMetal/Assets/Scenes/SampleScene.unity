@@ -13714,6 +13714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputVec: {x: 0, y: 0}
   Speed: 10
+  scanner: {fileID: 0}
 --- !u!95 &1176718390
 Animator:
   serializedVersion: 5
@@ -14155,7 +14156,7 @@ MonoBehaviour:
   id: 1
   prefabId: 2
   dmg: 3
-  count: 0
+  count: 2
   speed: 0
 --- !u!1 &2031106188
 GameObject:
